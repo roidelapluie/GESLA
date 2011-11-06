@@ -2,8 +2,6 @@ from inventory.models import *
 from django.contrib import admin
 from django.utils.translation import ugettext_lazy as _
 
-admin.title = "GESLA"
-
 class ObjectsAdmin(admin.ModelAdmin):
     list_display = ('common_name', 'product_name', 'location',
     'reference_person', 'out_of_accreditation')
