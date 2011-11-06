@@ -1,0 +1,126 @@
+{% extends "gesla/base.html" %}
+{% load i18n %}
+
+{% if user.is_staff %}
+{% block menu %}
+    <a href="/admin/inventory/object/{{ object.id }}/">{% trans "Edit object" %}</a>
+{% endblock %}
+{% endif %}
+{% block content %}
+{% if object %}
+{% if object.end_date and object.end_reason %}
+<div class="emphasis">{% trans "Object unused since" %} {{ object.end_date|date }}: {{ object.end_reason }}</a></div>
+{% else %}{% if object.end_reason %}
+<div class="emphasis">{% trans  "Object unused" %}: {{ object.end_reason }}</a></div>
+{% else %}{% if object.end_date %}
+<div class="emphasis">{% trans "Object unused since" %} {{ object.end_date }}</a></div>
+{% endif %}{% endif %}{% endif %}
+<div class="object_sheet">
+    <div class="right_field">
+    <div>
+    {% if object.out_of_accreditation %}
+        {% trans "Not accredited" %}
+    {% else %}
+        {% trans "Accredited" %}
+    {% endif %}
+    </div>
+    {% if object.standard_apparal %}
+    <div>
+        {% trans "Calibration apparal" %}
+    </div>
+    {% endif %}
+    </div>
+    <div class="field">
+        <label>{% trans "Name" %}</label>
+        <span>{{ object.common_name }}</span>
+    </div>
+    <div class="field">
+        <label>{% trans "Product name" %}</label>
+        <span>{{ object.product_name }}</span>
+    </div>
+    <div class="field">
+        <label>{% trans "Manufacturer" %}</label>
+        <span>{{ object.manufacturer.company_name }}</span>
+    </div>
+    {% if object.location %}
+    <div class="field">
+        <label>{% trans "Location" %}</label>
+        <span>{{ object.location.room }} ({{ object.location.site }})</span>
+    </div>
+    {% endif %}
+    {% if object.user_guide_location %}
+    <div class="field">
+        <label>{% trans "User guide location" %}</label>
+        <span>{{ object.user_guide_location.room }} ({{ object.user_guide_location.site }})</span>
+    </div>
+    {% endif %}
+    <div class="field">
+        <label>{% trans "Reference person" %}</label>
+        <span>{{ object.reference_person.first_name }} {{ object.reference_person.last_name }}</span>
+    </div>
+    {% if object.product_type or object.serial_number %}
+    <div class="right_box">
+        {% if object.product_type %}
+            <label>{% trans "Product type" %}</label>
+            <div>{{object.product_type }}</div>
+        {% endif %}
+        {% if object.serial_number %}
+            <label>{% trans "Serial number" %}</label>
+            <div>{{object.serial_number }}</div>
+        {% endif %}
+    </div>
+    {% endif %}
+    {% if object.tech_specs %}
+    <div class="area">
+        <label>{% trans "Technical specifications" %}</label/>
+        <div>{{ object.tech_specs|linebreaksbr }}</div>
+    </div>
+    {% endif %}
+    {% if object.env_cond %}
+    <div class="area">
+        <label>{% trans "Environnemental conditions" %}</label/>
+        <div>{{ object.env_cond|linebreaksbr  }}</div>
+    </div>
+    {% endif %}
+    {% if object.assets %}
+    <div class="area">
+        <label>{% trans "Assets" %}</label/>
+        <div>{{ object.assets|linebreaksbr  }}</div>
+    </div>
+    {% endif %}
+
+    <div class="references">
+        <label>{% trans "References" %}</label>
+        <div class="subreferences">
+            <label>{% trans "Usage" %}</label>
+            <div class="area">
+                {% if object.usage_reference %}
+                {{ object.usage_reference }}
+                {% else %}{% trans "None" %}{% endif %}
+            </div>
+            <label>{% trans "Maintenance" %}</label>
+            <div class="area">
+                {% if object.maintenance_reference %}
+                {{ object.maintenance_reference }}
+                {% else %}{% trans "None" %}{% endif %}
+            </div>
+            <label>{% trans "Calibration" %}</label>
+            <div class="area">
+                {% if object.calibration_reference %}
+                {{ object.calibration_reference }}
+                {% else %}{% trans "None" %}{% endif %}
+            </div>
+            <label>{% trans "Control" %}</label>
+            <div class="area">
+                {% if object.control_reference %}
+                {{ object.control_reference }}
+                {% else %}{% trans "None" %}{% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% else %}
+    <div class="error">{% trans "There is nothing to display" %}</div>
+{% endif %}
+{% endblock %}

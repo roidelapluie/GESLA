@@ -1,0 +1,219 @@
+body {
+    background-color: rgb(210,225,224);
+    font-size: 0.9em;
+}
+#container {
+    background-color: white;
+    width: 60%;
+    border-radius:20px;
+    margin: auto;
+    box-shadow: 3px 3px 4px #000; 
+}
+#header, #footer {
+    text-align: center;
+}
+#menu {
+    /*border-radius: 0.3em;*/
+    background-color: rgb(110,125,124);
+    margin-bottom: 0.5em;
+    padding-left: 1em;
+    padding-right: 1em;
+}
+#menu .login{
+    float: right;
+    background-color: rgb(90,105,104);
+    padding-left: 0.5em;
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+    padding-right: 0.5em;
+}
+#menu a {
+    color: white;
+}
+#content {
+    clear: right;
+}
+#content .info, #content .error, #content .emphasis {
+    border-radius:5px;
+    margin: 0 auto 0.5em auto;
+    text-align: center;
+    width: 60%;
+}
+#content .info {
+    background-color: rgb(150,255,150);
+}
+#content .emphasis {
+    background-color: rgb(90,115,125);
+    color: white;
+}
+#content .error {
+    background-color: rgb(200,0,0);
+    color: white;
+}
+#content h1 {
+    text-align: center;
+    font-size: 1.5em;
+}
+.box{
+    width: 50%;
+    margin: auto;
+    text-align: center;
+    border-radius: 10px;
+    background-color: rgb(210,225,224);
+}
+.box form {
+    padding-bottom: 0.2em;
+}
+.box input{
+    display: block;
+    margin: 0.5em auto 0.5em auto;
+    border-style: none;
+    padding: 0.1em;
+    width: 50%;
+    border-radius:5px;
+
+}
+.box input.submit{
+    background-color: rgb(90,105,104);
+    color: white;
+    border-radius:5px;
+    border-style: none;
+}
+.box h1 {
+    border-top-right-radius:10px;
+    border-top-left-radius:10px;
+    background-color: rgb(90,105,104);
+    color: white;
+    font-size: 1.1em;
+    text-align: center;
+}
+.box ul.errorlist {
+    margin: 0;
+    padding: 0;
+}
+.box ul.errorlist li {
+    border-radius:5px;
+    list-style: none;
+    display: block;
+    padding: 0px;
+    margin: 0px auto;
+    width: 80%;
+    background-color: rgb(200,0,0);
+    color: white;
+    font-size: 0.8em;
+} 
+.object {
+    width: 80%;
+    background-color: rgb(190,205,204);
+    margin: 1em auto;
+    padding: 0.5em;
+    border-radius: 0.4em;
+    clear: right;
+}
+.object:hover {
+    background-color: rgb(170,185,184);
+}
+.object .name {
+    width: 80%;
+}
+
+.object .actions a {
+    color: black;
+    font-weight: bold;
+}
+
+.object .actions {
+    float: right;
+}
+
+.object_sheet {
+    width: 90%;
+    margin: 1em auto;
+
+}
+
+.object_sheet .right_field {
+    float: right;
+}
+
+.object_sheet .right_field span {
+    float: right;
+    font-weight: bold;
+}
+
+.object_sheet .field span {
+    font-weight: bold;
+}
+
+label {
+    color: rgb(50,50,50);
+}
+
+.object_sheet .references .subreferences div.area{
+    margin: 0 2em 0 2em;
+}
+.object_sheet .references .subreferences {
+    width: 90%;
+    background-color: rgb(230,240,244);
+    margin: 1em auto;
+    padding: 0.5em;
+    border-radius: 0.4em;
+    clear: right;
+
+}
+.object_sheet .references label {
+    clear: right;
+    margin: 1em;
+    display: block;
+}
+.object_sheet .field label {
+    width: 20%;
+    margin-right: 1em;
+    float: left;
+    text-align: right;
+    font-weight: none;
+}
+
+.object_sheet .right_box {
+    float: right;
+    background-color: rgb(190,205,204);
+    padding: 0.5em;
+    border-radius: 0.5em;
+}
+
+#footer {
+    color: grey;
+    font-size: 0.7em;
+    clear: both;
+}
+.area {
+    margin: 2em 0 0 2em;
+}
+.area label {
+    padding: 0.2em;
+    color: rgb(50,50,50);
+
+}
+.area div {
+    border-left: 3px solid rgb(190,205,204);
+    border-radius: 0.7em;
+    padding: 0.5em;
+
+}
+table {
+    margin: auto;
+}
+table, tr, td, th {
+    border: 1px black solid;
+}
+table {
+    width: 90%;
+    border-collapse: collapse;
+}
+td {
+    padding: 0.4em;
+}
+th {
+    background-color: rgb(90,105,104);
+    color: white;
+}

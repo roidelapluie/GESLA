@@ -1,0 +1,37 @@
+{% load i18n %}<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="{{ LANGUAGE_CODE }}" xml:lang="{{ LANGUAGE_CODE }}" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
+<head>
+<title>{% block title %}{% endblock %}</title>
+<link rel="stylesheet" type="text/css" href="/media/css/base.css" />
+<body class="{% block bodyclass %}{% endblock %}">
+<!-- Container -->
+<div id="container">
+    {% block header %}<div id="header"><img src="/media/gesla.png" /></div>{% endblock %}
+    <div id="menu">{% block menu %}{% endblock %}
+    {% if user.is_authenticated %}
+        &nbsp;<a class="login" href="/logout">{% trans "Logout" %} ({{ user.username }})</a>
+        {% if user.is_staff %}
+        <a class="login" href="/admin">{% trans "Administration" %}</a>
+        {% endif %}
+    {% else %}
+        &nbsp;<a class="login" href="/login">{% trans "Login" %}</a>
+    {% endif %}
+    </div>
+    <div id="content">
+    {% for info in infos %}
+        <div class="info">
+            {{ info }}
+        </div>
+    {% endfor %}
+    {% for error in errors %}
+        <div class="error">
+            {{ error }}
+        </div>
+    {% endfor %}
+    {% block content %}{% endblock %}</div>
+    {% block footer %}<div id="footer">GESLA - powered by Django!</div>{% endblock %}
+</div>
+<!-- END Container -->
+
+</body>
+</html>

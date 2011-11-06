@@ -1,0 +1,16 @@
+{% extends "gesla/base.html" %}
+{% load i18n %}
+
+{% block content %}
+<h1>{% trans "Your laboratory equipment" %}</h1>
+{% if objects %}
+    {% for object in objects %}
+    <div class="object">
+        <div class="actions"><a href="/object/{{ object.id }}">{% trans "View" %}</a></div>
+        <div class="name">{{ object.common_name }}</div>
+    </div>
+    {% endfor %}
+{% else %}
+    <div class="info">{% trans "There is nothing to display" %}</div>
+{% endif %}
+{% endblock %}
