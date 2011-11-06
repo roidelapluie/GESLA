@@ -1,6 +1,7 @@
 from django.contrib.auth.views import login
 from django.http import HttpResponseRedirect
 import re
+
 class SiteLogin:
     "This middleware requires a login for every view"
     def process_request(self, request):
