@@ -1,6 +1,21 @@
 {% extends "gesla/base.html" %}
 {% load i18n %}
 
+{% block javascript %}
+<script type="text/javascript">
+function show_div(div_id){
+    $("#"+div_id+"_text").slideDown()
+    $("#show_"+div_id).fadeOut(300)
+    $("#hide_"+div_id).delay(350).fadeIn()
+}
+function hide_div(div_id){
+    $("#"+div_id+"_text").slideUp()
+    $("#hide_"+div_id).fadeOut(300)
+    $("#show_"+div_id).delay(350).fadeIn()
+}
+</script>
+{% endblock %}
+
 {% if user.is_staff %}
 {% block menu %}
     <a href="/admin/inventory/object/{{ object.id }}/">{% trans "Edit object" %}</a>
@@ -11,9 +26,9 @@
 {% if object.end_date and object.end_reason %}
 <div class="emphasis">{% trans "Object unused since" %} {{ object.end_date|date }}: {{ object.end_reason }}</a></div>
 {% else %}{% if object.end_reason %}
-<div class="emphasis">{% trans  "Object unused" %}: {{ object.end_reason }}</a></div>
+<div class="emphasis">{% trans  "Object unused" %}: {{ object.end_reason|date }}</a></div>
 {% else %}{% if object.end_date %}
-<div class="emphasis">{% trans "Object unused since" %} {{ object.end_date }}</a></div>
+<div class="emphasis">{% trans "Object unused since" %} {{ object.end_date|date }}</a></div>
 {% endif %}{% endif %}{% endif %}
 <div class="object_sheet">
     <div class="right_field">
@@ -92,28 +107,88 @@
     <div class="references">
         <label>{% trans "References" %}</label>
         <div class="subreferences">
-            <label>{% trans "Usage" %}</label>
+            <label>
+                {% trans "Usage" %}
+                {% if object.usage %}
+                <span id="show_usage" class="js_link" onclick="javascript:show_div('usage');">
+                    {% trans "Show detail" %}
+                </span>
+                <span id="hide_usage" class="js_link hidden" onclick="javascript:hide_div('usage');">
+                    {% trans "Hide detail" %}
+                </span>
+                {% endif %}
+            </label>
             <div class="area">
                 {% if object.usage_reference %}
                 {{ object.usage_reference }}
+                {% if object.usage %}
+                <div id="usage_text" class="hidden">
+                    {{ object.usage|linebreaksbr }}
+                </div>
+                {% endif %}
                 {% else %}{% trans "None" %}{% endif %}
             </div>
-            <label>{% trans "Maintenance" %}</label>
+            <label>
+                {% trans "Maintenance" %}
+                {% if object.maintenance %}
+                <span id="show_maintenance" class="js_link" onclick="javascript:show_div('maintenance');">
+                    {% trans "Show detail" %}
+                </span>
+                <span id="hide_maintenance" class="js_link hidden" onclick="javascript:hide_div('maintenance');">
+                    {% trans "Hide detail" %}
+                </span>
+                {% endif %}
+            </label>
             <div class="area">
                 {% if object.maintenance_reference %}
                 {{ object.maintenance_reference }}
+                {% if object.maintenance %}
+                <div id="maintenance_text" class="hidden">
+                    {{ object.maintenance|linebreaksbr }}
+                </div>
+                {% endif %}
                 {% else %}{% trans "None" %}{% endif %}
             </div>
-            <label>{% trans "Calibration" %}</label>
+            <label>
+                {% trans "Calibration" %}
+                {% if object.calibration %}
+                <span id="show_calibration" class="js_link" onclick="javascript:show_div('calibration');">
+                    {% trans "Show detail" %}
+                </span>
+                <span id="hide_calibration" class="js_link hidden" onclick="javascript:hide_div('calibration');">
+                    {% trans "Hide detail" %}
+                </span>
+                {% endif %}
+                </label>
             <div class="area">
                 {% if object.calibration_reference %}
                 {{ object.calibration_reference }}
+                {% if object.calibration %}
+                <div id="calibration_text" class="hidden">
+                    {{ object.calibration|linebreaksbr }}
+                </div>
+                {% endif %}
                 {% else %}{% trans "None" %}{% endif %}
             </div>
-            <label>{% trans "Control" %}</label>
+            <label>
+                {% trans "Control" %}
+                {% if object.control %}
+                <span id="show_control" class="js_link" onclick="javascript:show_div('control');">
+                    {% trans "Show detail" %}
+                </span>
+                <span id="hide_control" class="js_link hidden" onclick="javascript:hide_div('control');">
+                    {% trans "Hide detail" %}
+                </span>
+                {% endif %}
+            </label>
             <div class="area">
                 {% if object.control_reference %}
                 {{ object.control_reference }}
+                {% if object.control %}
+                <div id="control_text" class="hidden">
+                    {{ object.control|linebreaksbr }}
+                </div>
+                {% endif %}
                 {% else %}{% trans "None" %}{% endif %}
             </div>
         </div>

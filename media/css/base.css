@@ -102,9 +102,14 @@ body {
     color: white;
     font-size: 0.8em;
 } 
+.closed_object {
+    background-color: rgb(210,210,210);
+}
 .object {
-    width: 80%;
     background-color: rgb(190,205,204);
+}
+.object, .closed_object {
+    width: 80%;
     margin: 1em auto;
     padding: 0.5em;
     border-radius: 0.4em;
@@ -113,16 +118,16 @@ body {
 .object:hover {
     background-color: rgb(170,185,184);
 }
-.object .name {
+.object .name, .closed_object .name {
     width: 80%;
 }
 
-.object .actions a {
+.object .actions a, .closed_object .actions a {
     color: black;
     font-weight: bold;
 }
 
-.object .actions {
+.object .actions, .closed_object .actions {
     float: right;
 }
 
@@ -216,4 +221,11 @@ td {
 th {
     background-color: rgb(90,105,104);
     color: white;
+}
+span.js_link{
+    text-decoration: underline;
+    color:rgb(90,105,104);
+}
+.hidden{
+    display:none;
 }

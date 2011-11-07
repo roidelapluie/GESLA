@@ -2,10 +2,21 @@
 {% load i18n %}
 
 {% block content %}
-<h1>{% trans "Your laboratory equipment" %}</h1>
+<h1>{% trans "Opened folders" %} ({{ objects|length }})</h1>
 {% if objects %}
     {% for object in objects %}
     <div class="object">
+        <div class="actions"><a href="/object/{{ object.id }}">{% trans "View" %}</a></div>
+        <div class="name">{{ object.common_name }}</div>
+    </div>
+    {% endfor %}
+{% else %}
+    <div class="info">{% trans "There is nothing to display" %}</div>
+{% endif %}
+<h1>{% trans "Closed folders" %} ({{ closed_objects|length }})</h1>
+{% if closed_objects %}
+    {% for object in closed_objects %}
+    <div class="closed_object">
         <div class="actions"><a href="/object/{{ object.id }}">{% trans "View" %}</a></div>
         <div class="name">{{ object.common_name }}</div>
     </div>

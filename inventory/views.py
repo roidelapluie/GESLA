@@ -8,13 +8,19 @@ from django.http import HttpResponseRedirect
 from models import Object
 
 def index(request):
-    objects = Object.objects.filter(reference_person=request.user)
-    return render_to_response('gesla/index.html', { 'objects': objects },
+    objects = Object.objects.filter(reference_person=request.user,
+        end_date__isnull=True)
+    closed_objects = Object.objects.filter(reference_person=request.user,
+        end_date__isnull=False)
+    return render_to_response('gesla/index.html', { 'objects': objects,
+        'closed_objects': closed_objects },
         context_instance=RequestContext(request))
 
 def all(request):
-    objects = Object.objects.all()
-    return render_to_response('gesla/index.html', { 'objects': objects },
+    objects = Object.objects.filter(end_date__isnull=True)
+    closed_objects = Object.objects.filter(end_date__isnull=False)
+    return render_to_response('gesla/index.html', { 'objects': objects,
+        'closed_objects': closed_objects },
         context_instance=RequestContext(request))
 
 def object_view(request, object_id):
