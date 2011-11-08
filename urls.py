@@ -9,6 +9,8 @@ urlpatterns = patterns('',
     (r'^login$', 'inventory.views.user_login'),
     (r'^logout$', 'inventory.views.user_logout'),
     (r'^object/(\d+)$', 'inventory.views.object_view'),
+    (r'^manufacturer/all$', 'inventory.views.manufacturer_all'),
+    (r'^manufacturer/(\d+)$', 'inventory.views.manufacturer_view'),
     (r'^admin/', include(admin.site.urls)),
 )
 
