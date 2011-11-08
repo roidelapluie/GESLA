@@ -4,14 +4,14 @@
 {% block javascript %}
 <script type="text/javascript">
 function show_div(div_id){
-    $("#"+div_id+"_text").slideDown()
-    $("#show_"+div_id).fadeOut(300)
-    $("#hide_"+div_id).delay(350).fadeIn()
+    $("#"+div_id+"_text").slideDown();
+    $("#show_"+div_id).fadeOut(50);
+    $("#hide_"+div_id).delay(55).fadeIn();
 }
 function hide_div(div_id){
-    $("#"+div_id+"_text").slideUp()
-    $("#hide_"+div_id).fadeOut(300)
-    $("#show_"+div_id).delay(350).fadeIn()
+    $("#"+div_id+"_text").slideUp();
+    $("#hide_"+div_id).fadeOut(55);
+    $("#show_"+div_id).delay(50).fadeIn();
 }
 </script>
 {% endblock %}
@@ -55,7 +55,7 @@ function hide_div(div_id){
     </div>
     <div class="field">
         <label>{% trans "Manufacturer" %}</label>
-        <span>{{ object.manufacturer.company_name }}</span>
+        <span>{% if object.manufacturer %}<a href="/manufacturer/{{ object.manufacturer.id }}">{{ object.manufacturer.name }}</a>{% else %}{% trans "None"  %}{% endif %}</span>
     </div>
     {% if object.location %}
     <div class="field">
@@ -105,6 +105,13 @@ function hide_div(div_id){
     {% endif %}
 
     <div class="references">
+        <label>{% trans "Maintenance" %}</label>
+        Maintenance: {{ object.maintenance_date|date }}<br />
+        Next: {{ object.next_maintenance_date|date }}<br />
+        Days: {{ object.maintenance_days }}<br />
+    </div>
+
+    <div class="references">
         <label>{% trans "References" %}</label>
         <div class="subreferences">
             <label>
@@ -122,7 +129,7 @@ function hide_div(div_id){
                 {% if object.usage_reference %}
                 {{ object.usage_reference }}
                 {% if object.usage %}
-                <div id="usage_text" class="hidden">
+                <div id="usage_text" class="hidden ref_text">
                     {{ object.usage|linebreaksbr }}
                 </div>
                 {% endif %}
@@ -143,7 +150,7 @@ function hide_div(div_id){
                 {% if object.maintenance_reference %}
                 {{ object.maintenance_reference }}
                 {% if object.maintenance %}
-                <div id="maintenance_text" class="hidden">
+                <div id="maintenance_text" class="hidden ref_text">
                     {{ object.maintenance|linebreaksbr }}
                 </div>
                 {% endif %}
@@ -164,7 +171,7 @@ function hide_div(div_id){
                 {% if object.calibration_reference %}
                 {{ object.calibration_reference }}
                 {% if object.calibration %}
-                <div id="calibration_text" class="hidden">
+                <div id="calibration_text" class="hidden ref_text">
                     {{ object.calibration|linebreaksbr }}
                 </div>
                 {% endif %}
@@ -185,7 +192,7 @@ function hide_div(div_id){
                 {% if object.control_reference %}
                 {{ object.control_reference }}
                 {% if object.control %}
-                <div id="control_text" class="hidden">
+                <div id="control_text" class="hidden ref_text">
                     {{ object.control|linebreaksbr }}
                 </div>
                 {% endif %}

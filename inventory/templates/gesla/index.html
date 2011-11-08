@@ -1,13 +1,36 @@
 {% extends "gesla/base.html" %}
 {% load i18n %}
 
+{% block javascript %}
+<script type="text/javascript">
+function expand(div_id){
+    $("#"+div_id+"_div").slideToggle();
+}
+$(document).ready(function() {
+    $("#dropdown-select").autocomplete({
+source : [{% for object in objects %}"{{object.id}}. {{object.common_name}}", {% endfor %}"TEST"]
+});
+});
+</script>
+{% endblock %}
+
 {% block content %}
 <h1>{% trans "Opened folders" %} ({{ objects|length }})</h1>
+<input type="text" id="dropdown-select">
 {% if objects %}
     {% for object in objects %}
-    <div class="object">
+    <div class="object" onclick="javascript:expand('object_{{ object.id }}')">
         <div class="actions"><a href="/object/{{ object.id }}">{% trans "View" %}</a></div>
-        <div class="name">{{ object.common_name }}</div>
+        <div class="name">{{object.id}} {{ object.common_name }}</div>
+    </div>
+    <div class="hidden" id="object_{{ object.id }}_div">
+        <div class="explanation">{% trans "Inventory number" %}: {{ object.id }}</div>
+        <div class="explanation">{% trans "Reference person" %}: {{ object.reference_person.first_name }} {{ object.reference_person.last_name }}</div>
+         <div class="explanation"><label>{% trans "Maintenance" %}</label>
+        {{ object.maintenance_date|date }}<br />
+        {{ object.next_maintenance_date|date }}<br />
+        {{ object.maintenance_days }}<br />
+        </div>
     </div>
     {% endfor %}
 {% else %}
