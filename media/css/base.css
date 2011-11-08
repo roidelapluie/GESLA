@@ -1,10 +1,11 @@
 body {
     background-color: rgb(210,225,224);
     font-size: 0.9em;
+    overflow-y: scroll;
 }
 #container {
     background-color: white;
-    width: 60%;
+    width: 80%;
     border-radius:20px;
     margin: auto;
     box-shadow: 3px 3px 4px #000; 
@@ -105,6 +106,13 @@ body {
 .closed_object {
     background-color: rgb(210,210,210);
 }
+div.ref_text{
+    background-color: white;
+    border: 3px solid rgb(190,205,204);
+    border-radius: 0.7em;
+    padding: 0.5em;
+    box-shadow: 1px 1px 4px #000; 
+}
 .object {
     background-color: rgb(190,205,204);
 }
@@ -133,8 +141,8 @@ body {
 
 .object_sheet {
     width: 90%;
-    margin: 1em auto;
-
+    margin: 1em auto 2em auto;
+    clear: left;
 }
 
 .object_sheet .right_field {
@@ -156,6 +164,15 @@ label {
 
 .object_sheet .references .subreferences div.area{
     margin: 0 2em 0 2em;
+}
+.manufacter {
+    width: 90%;
+    background-color: rgb(230,240,244);
+    margin: 1em auto;
+    padding: 0.5em;
+    border-radius: 0.4em;
+    clear: right;
+
 }
 .object_sheet .references .subreferences {
     width: 90%;
@@ -228,4 +245,44 @@ span.js_link{
 }
 .hidden{
     display:none;
+}
+div.explanation {
+    width: 80%;
+    margin:auto;
+}
+
+.ui-autocomplete-loading {
+    background-color: red;
+}
+.ui-menu{
+    border-radius:0.4em;
+    border: 1px solid rgb(130,140,144);
+    background-color: rgb(230,240,244);
+    box-shadow: 2px 2px 4px #000;
+}
+.ui-menu-item{
+    list-style: none;
+    border-top: 1px solid rgb(180,190,195);
+    border-bottom: 1px solid rgb(180,190,195);
+    padding: 0.2em;
+}
+.ui-menu-item:hover {
+    list-style:none;
+    background-color: rgb(210,230,235);
+}
+.ui-menu {
+    width: 24%;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+#dropdown-select:first-word {
+font-weight:bold;
+}
+#dropdown-select {
+    width: 40%;
+    border: 2px solid black;
+    border-radius: 0.4em;
+    margin: auto;
+    display: block;
 }
