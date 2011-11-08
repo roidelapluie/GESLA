@@ -1,0 +1,93 @@
+{% extends "gesla/base.html" %}
+{% load i18n %}
+
+{% if user.is_staff %}
+{% block menu %}
+    <a href="/admin/inventory/manufacturer/{{ manufacturer.id }}/">{% trans "Edit manufacturer" %}</a>
+{% endblock %}
+{% endif %}
+{% block content %}
+{% if manufacturer %}
+<div class="object_sheet">
+    <div class="field">
+        <label>{% trans "Name" %}</label>
+        <span>{{ manufacturer.name }}</span>
+    </div>
+    {% if manufacturer.phone_number %}
+    <div class="field">
+        <label>{% trans "Phone number" %}</label>
+        <span>{{ manufacturer.phone_number }}</span>
+    </div>
+    {% endif %}
+    {% if manufacturer.fax_number %}
+    <div class="field">
+        <label>{% trans "Fax number" %}</label>
+        <span>{{ manufacturer.fax_number }}</span>
+    </div>
+    {% endif %}
+    {% if manufacturer.mail_address %}
+    <div class="field">
+        <label>{% trans "Mail address" %}</label>
+        <span>{{ manufacturer.mail_address }}</span>
+    </div>
+    {% endif %}
+    {% if manufacturer.address %}
+    <div class="field">
+        <label>{% trans "Address" %}</label>
+        <span>{{ manufacturer.address }}</span>
+    </div>
+    {% endif %}
+    {% if manufacturer.city %}
+    <div class="field">
+        <label>{% trans "Zip code" %}</label>
+        <span>{{ manufacturer.city.zip_code }}</span>
+    </div>
+    <div class="field">
+        <label>{% trans "City" %}</label>
+        <span>{{ manufacturer.city.name }}</span>
+    </div>
+    <div class="field">
+        <label>{% trans "Country" %}</label>
+        <span>{{ manufacturer.city.country.name }}</span>
+    </div>
+    {% endif %}
+    {% if manufacturer.contact_name %}
+    <div class="field">
+        <label>{% trans "Contact name" %}</label>
+        <span>{{ manufacturer.contact_name }}</span>
+    </div>
+    {% endif %}
+    {% if manufacturer.contact_mail_address %}
+    <div class="field">
+        <label>{% trans "Contact mail address" %}</label>
+        <span>{{ manufacturer.contact_mail_address }}</span>
+    </div>
+    {% endif %}
+    {% if manufacturer.contact_phone_number %}
+    <div class="field">
+        <label>{% trans "Contact phone number" %}</label>
+        <span>{{ manufacturer.contact_phone_number }}</span>
+    </div>
+    {% endif %}
+
+</div>
+
+<h1>{% trans "Folders" %} ({{ objects|length }})</h1>
+{% if objects %}
+    {% for object in objects %}
+    <div class="{% if object.end_date %}closed_{% endif %}object" onclick="javascript:expand('object_{{ object.id }}')">
+        <div class="actions"><a href="/object/{{ object.id }}">{% trans "View" %}</a></div>
+        <div class="name">{{object.id}} {{ object.common_name }}</div>
+    </div>
+    <div class="hidden" id="object_{{ object.id }}_div">
+        <div class="explanation">{% trans "Inventory number" %}: {{ object.id }}</div>
+        <div class="explanation">{% trans "Reference person" %}: {{ object.reference_person.first_name }} {{ object.reference_person.last_name }}</div>
+    </div>
+    {% endfor %}
+{% else %}
+    <div class="info">{% trans "There is nothing to display" %}</div>
+{% endif %}
+{% else %}
+    <div class="error">{% trans "There is nothing to display" %}</div>
+{% endif %}
+{% endblock %}
