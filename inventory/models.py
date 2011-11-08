@@ -16,7 +16,6 @@ class City(models.Model):
     name = models.CharField(_('name'), max_length=32)
     zip_code = models.IntegerField(_('zip code'))
     country = models.ForeignKey(Country, verbose_name=_('country'))
-
     class Meta:
         verbose_name = _('city')
         verbose_name_plural = _('cities')
@@ -47,23 +46,31 @@ class Location(models.Model):
         return self.room + ' - ' + self.site.__unicode__()
 
 class Manufacturer(models.Model):
-    company_name = models.CharField(_('company name'), max_length=32)
-    city = models.ForeignKey(City, verbose_name=_('city'))
-    address = models.CharField(_('address'), max_length=64, blank=True)
+    name = models.CharField(_('company name'), max_length=64)
+    city = models.ForeignKey(City, verbose_name=_('city'), blank=True,
+        null=True)
+    address = models.CharField(_('address'), max_length=64, blank=True,
+        null=True)
     phone_number = models.CharField(_('phone number'), max_length=16,
+        blank=True, null=True)
+    fax_number = models.CharField(_('fax number'), max_length=16, null=True,
         blank=True)
-    fax_number = models.CharField(_('fax number'), max_length=16, blank=True)
+    mail_address = models.EmailField(_('mail address'), max_length=16,
+        blank=True, null=True)
     contact_name = models.CharField(_('contact name'), max_length=32,
-        blank=True)
+        blank=True, null=True)
     contact_phone_number = models.CharField(_('contact phone number'),
-        max_length=32, blank=True)
+        max_length=32, blank=True, null=True)
+    contact_mail_address = models.EmailField(_('contact mail address'),
+        max_length=32, blank=True, null=True)
 
     class Meta:
         verbose_name = _('manufacturer')
         verbose_name_plural = _('manufacturers')
+        ordering = ['name']
 
     def __unicode__(self):
-        return self.company_name
+        return self.name
 
 class Object(models.Model):
     common_name = models.CharField(_('common name'), max_length=64)
@@ -121,16 +128,17 @@ class Object(models.Model):
     control_date = models.DateField(_('control date'), blank=True, null=True)
     maintenance_date = models.DateField(_('maintenance date'), blank=True,
         null=True)
-    last_maintenance_date = models.DateField(_('last maintenance date'),
+    next_maintenance_date = models.DateField(_('last maintenance date'),
         blank=True, null=True)
-    last_calibration_date = models.DateField(_('last calibration date'),
+    next_calibration_date = models.DateField(_('last calibration date'),
         blank=True, null=True)
-    last_control_date = models.DateField(_('last control date'), blank=True,
+    next_control_date = models.DateField(_('last control date'), blank=True,
         null=True)
 
     purchase_date = models.DateField(_('purchase date'), blank=True, null=True)
     bought_new = models.BooleanField(_('bought new'))
-    price = models.IntegerField(_('price'), blank=True, null=True)
+    price = models.DecimalField(_('price'), max_digits=10, decimal_places=2,
+        blank=True, null=True)
     order_date = models.DateField(_('order date'), blank=True, null=True)
     activation_date = models.DateField(_('activation date'), blank=True,
         null=True)
@@ -155,6 +163,7 @@ class Object(models.Model):
     class Meta:
         verbose_name = _('object')
         verbose_name_plural = _('objects')
+        ordering = ['id']
 
     def __unicode__(self):
         return self.common_name
